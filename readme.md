@@ -1,15 +1,17 @@
-# AutoRest Extension Base
+# AutoRest Report extension
 
-Allows to easily create an AutoRest extension.
+AutoRest extension that outputs data that can be used to build reports.
 
 ## Pipeline
+
+The below section defines the AutoRest pipeline for this extension.
 
 ``` yaml
 pipeline:
   report: # <- name of plugin
-    scope: hello
-    # ^ will make this plugin run only when `--hello` is passed on the CLI or
-    # when there is `hello: true | <some object>` in the configuration file
+    scope: report
+    # ^ will make this plugin run only when `--report` is passed on the CLI or
+    # when there is `report: true | <some object>` in the configuration file
     input: swagger-document/identity
     # ^ other pipeline step to use as a predecessor in the DAG
     # takes the outputs of that step as input to this plugin.

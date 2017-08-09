@@ -2,6 +2,19 @@
 
 AutoRest extension that outputs data that can be used to build reports.
 
+## How to use
+
+To use this extension, add the below configuration to your readme.md.
+
+This only works with autorest 2.0.
+
+``` yaml $(report)
+use-extension:
+  report: https://github.com/jaredmoo/autorest-extension-report
+```
+
+Then run `autorest --report.output-folder=.` .
+
 ## Pipeline
 
 The below section defines the AutoRest pipeline for this extension.

@@ -16,13 +16,14 @@ function generateOperationNames(path: string, methods: string[])
     const segments = path.split("/");
 
     // Drop parameter segments, which are the segments that contain "{"
-    const isParameterSegment = (s: string) => !s.includes("{")
-    const nonParameterSegments = segments.filter(isParameterSegment);
+    const isNonParameterSegment = (s: string) => !s.includes("{")
+    const nonParameterSegments = segments.filter(isNonParameterSegment);
 
-    // Join the remaining non-parameter segmentsand add final "/" if the last segment is not a parameter segment
+    // Join the remaining non-parameter segments and add final "/" if the last segment is a parameter segment
+    const lastSegmentIsParameter = !isNonParameterSegment(segments[segments.length - 1]);
     const joinedSegments =
         nonParameterSegments.join("/").toUpperCase() +
-        (isParameterSegment(segments[segments.length - 1]) ? "/" : "");
+        (lastSegmentIsParameter ? "/" : "");
 
     // Write out
     let opNames: string[] = [];

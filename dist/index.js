@@ -21,11 +21,12 @@ function generateOperationNames(path, methods) {
     // Split the uri into segments
     const segments = path.split("/");
     // Drop parameter segments, which are the segments that contain "{"
-    const isParameterSegment = (s) => !s.includes("{");
-    const nonParameterSegments = segments.filter(isParameterSegment);
-    // Join the remaining non-parameter segmentsand add final "/" if the last segment is not a parameter segment
+    const isNonParameterSegment = (s) => !s.includes("{");
+    const nonParameterSegments = segments.filter(isNonParameterSegment);
+    // Join the remaining non-parameter segments and add final "/" if the last segment is a parameter segment
+    const lastSegmentIsParameter = !isNonParameterSegment(segments[segments.length - 1]);
     const joinedSegments = nonParameterSegments.join("/").toUpperCase() +
-        (isParameterSegment(segments[segments.length - 1]) ? "/" : "");
+        (lastSegmentIsParameter ? "/" : "");
     // Write out
     let opNames = [];
     for (let method in methods) {
